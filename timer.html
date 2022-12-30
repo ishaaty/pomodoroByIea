@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="timerStyle.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <button id="timerArrows"><i style="font-size: 80px" class="material-icons">arrow_upward</button>
+        <button style="margin-right: 0px; margin-bottom: 0px; padding-bottom: 0px" id="timer"><h1>25:00</h1>
+        </button><button id="timerArrows"><i style="font-size: 80px" class="material-icons">arrow_downward</button>
+    </div>
+    <div>
+        <button id="timer" style="font-size: 60px; margin-top: 0px; padding-top: 0px">minutes</button>
+    </div>
+    <div>
+        <button class="infoOrDelBtn">Start/Stop</button>
+        <button class="infoOrDelBtn">Reset</button>
+    </div>
+    <div class="container">
+        <div class="section" id="stuffList">
+            <h1 style="font-size: 58px">Tasks:</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Estimated minutes</th>
+                        <th>Sub-tasks</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>task 1</td>
+                        <td>60</td>
+                        <td>yeet</td>
+                        <td>
+                            <a href="task.html">
+                                <button class="infoOrDelBtn">
+                                    <i class="material-icons right">edit</i>
+                                    Info/Edit
+                                </button>
+                            </a>
+                            <button class="infoOrDelBtn">
+                                <i class="material-icons right">delete</i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>task 2</td>
+                        <td>25</td>
+                        <td>brr</td>
+                        <td>
+                            <a href="task.html">
+                                <button class="infoOrDelBtn">
+                                    <i class="material-icons right">edit</i>
+                                    Info/Edit
+                                </button>
+                            </a>
+                            <button class="infoOrDelBtn">
+                                <i class="material-icons right">delete</i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h1 style="font-size: 58px">Enter task(s):</h1>
+            <form>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" name="name" id="nameInput" class="validate" data-length="32" placeholder="Task name" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="number" name="minutes" id="minutesInput" value=None placeholder="Estimated minutes" required>
+                    </div>
+                </div>
+                <button class="infoOrDelBtn" type="submit">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+    <p>Made with <a href=""><i class="material-icons">favortie</i></a></p>
+</body>
+</html>

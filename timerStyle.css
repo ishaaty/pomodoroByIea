@@ -1,6 +1,7 @@
 html {
     text-align: center;
     margin-top: 55px;
+    color: black;
 }
 
 h1 {
@@ -38,6 +39,10 @@ button {
 
 #timerArrows:hover {
     color: goldenrod;
+}
+
+#timerArrows:active {
+    background-color: white;
 }
 
 #timer:hover {

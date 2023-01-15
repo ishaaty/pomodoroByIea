@@ -1,0 +1,83 @@
+html {
+    text-align: center;
+    margin-top: 55px;
+    color: black;
+}
+
+h1 {
+    font-family: "Times New Roman";
+    font-size: 130px;
+    margin-bottom: 0px;
+}
+
+h2 {
+    color: black;
+    font-size: 46px;
+    margin-top: 0px;
+}
+
+button {
+    font-family: "Times New Roman";
+    color: black;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    border-radius: 15px;
+    border-color: white;
+    border-style: solid;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    transition: all .75s;
+}
+
+#timerArrows {
+    cursor: pointer;
+}
+
+#timerArrows:hover {
+    color: goldenrod;
+}
+
+#timerArrows:active {
+    background-color: white;
+}
+
+#timer:hover {
+    background-color: white;
+    color: black;
+}
+
+#timer:active {
+    background-color: white;
+}
+
+.blackWhiteBtn {
+    border-width: 7px;
+    color: white;
+    background-color: black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+
+.blackWhiteBtn:hover {
+    color: black;
+    background-color: white;
+    border-color: goldenrod;
+}
+
+tr {
+    font-size: 16px;
+}
+
+td {
+    font-size: 16px;
+}
+
+input:active {
+    color: goldenrod;
+}
+

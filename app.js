@@ -9,6 +9,7 @@ let data;
 // Configure Express to use EJS
 app.set( "views",  __dirname + "/views");
 app.set( "view engine", "ejs" );
+app.use(express.urlencoded({encoded: false}));
 
 // define middleware that logs all incoming requests
 app.use(logger("dev"));
@@ -19,13 +20,14 @@ app.get( "/", ( req, res ) => {
     res.render("index");
 } );
 
-// define a route for the stuff inventory page
+// read items - works
 const read_timer_all_sql = `
     SELECT 
-        id, task, estimated_time
+        id, task, estimated_time, description
     FROM
         tasks
 `
+
 app.get( "/timer", ( req, res ) => {
     db.execute(read_timer_all_sql, (error, results) => {
         if (error)
@@ -35,7 +37,8 @@ app.get( "/timer", ( req, res ) => {
     });
 });
 
-// define a route for the item detail page
+
+// read item  - works
 const read_task_sql = `
     SELECT 
         task, estimated_time, description 
@@ -44,6 +47,7 @@ const read_task_sql = `
     WHERE
         id = ?
 `
+
 app.get( "/timer/task/:id", ( req, res, next ) => {
     db.execute(read_task_sql, [req.params.id], (error, results) => {
         if (error)
@@ -55,6 +59,59 @@ app.get( "/timer/task/:id", ( req, res, next ) => {
             res.render('task', data);
     });
 });
+
+
+// delete - works
+const delete_task_sql = `
+    DELETE 
+    FROM
+        tasks
+    WHERE
+        id = ?
+`
+
+app.get("/timer/task/:id/delete", ( req, res ) => {
+    db.execute(delete_task_sql, [req.params.id], (error, results) => {
+        if (error)
+            res.status(500).send(error); //Internal Server Error
+        else {
+            res.redirect("/timer");
+        }
+    });
+})
+
+// insert - works
+const insert_task_sql = `
+    INSERT INTO tasks
+        (task, estimated_time)
+    VALUES
+        (?, ?)
+`
+
+app.post("/timer", (req, res) =>{
+    db.execute(insert_task_sql, [req.body.taskName, req.body.minutes], (error, results) => {
+        if (error)
+            res.status(500).send(error); //Internal Server Error
+        else {
+            res.redirect("/timer");
+        }
+    });
+
+});
+
+
+// update - does not work
+const update_task_sql = `
+    UPDATE tasks
+    SET
+        task = ?
+        estimated_time = ?
+        description = ?
+    WHERE 
+        id = ?;
+`
+
+// app.post("/timer/task/:id")
 
 // start the server
 app.listen( port, () => {

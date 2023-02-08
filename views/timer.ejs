@@ -12,16 +12,16 @@
 </head>
 <body>
     <div>
-        <button id="timerArrows"><i style="font-size: 80px" class="material-icons">arrow_upward</i></button>
-        <button style="margin-right: 0px; margin-bottom: 0px; padding-bottom: 0px" id="timer"><h1>25:00</h1>
-        </button><button id="timerArrows"><i style="font-size: 80px" class="material-icons">arrow_downward</i></button>
+        <button id="timerArrows" class="upArrow"><i style="font-size: 80px" class="material-icons">arrow_upward</i></button>
+        <button style="margin-right: 0px; margin-bottom: 0px; padding-bottom: 0px" id="timer"><h1 id="minutes">25:00</h1>
+        </button><button id="timerArrows" class="downArrow"><i style="font-size: 80px" class="material-icons">arrow_downward</i></button>
     </div>
     <div>
         <button id="timer" style="font-size: 60px; margin-top: 0px; padding-top: 0px">minutes</button>
     </div>
     <div>
-        <button class="blackWhiteBtn">Start/Stop</button>
-        <button class="blackWhiteBtn">Reset</button>
+        <button class="blackWhiteBtn" id="startStop">Start/Stop</button>
+        <button class="blackWhiteBtn" id="reset">Reset</button>
     </div>
     <div class="container">
         <div class="section">
@@ -48,10 +48,12 @@
                                         Info/Edit
                                     </button>
                                 </a>
-                                <button class="blackWhiteBtn">
-                                    <i class="material-icons right">delete</i>
-                                    Delete
-                                </button>
+                                <a href="/timer/task/<%= tasks[i].id %>/delete">
+                                    <button class="blackWhiteBtn">
+                                        <i class="material-icons right">delete</i>
+                                        Delete
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                     <% }%>
@@ -61,10 +63,10 @@
 
         <div class="section">
             <h1 style="font-size: 58px; margin-top: 100px; margin-bottom: 45px">Enter task(s):</h1>
-            <form>
+            <form method="POST" action="/timer">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input type="text" name="name" id="nameInput" class="validate" data-length="32" placeholder="Task name" required>
+                        <input type="text" name="taskName" id="taskInput" class="validate" data-length="32" placeholder="Task name" required>
                     </div>
                     <div class="input-field col s6">
                         <input type="number" name="minutes" id="minutesInput" placeholder="Estimated minutes" required>
@@ -77,5 +79,6 @@
         </div>
     </div>
     <p style="font-size: 16px; text-align: center">Made with <a href="https://github.com/ishaaty/pomodoroByIea" target="_blank" style="color: black"><i class="material-icons" style="font-size: 12px">favorite_border</i></a></p>
+    <script src="timer.js"></script>
 </body>
 </html>

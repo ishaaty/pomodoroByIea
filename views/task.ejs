@@ -40,19 +40,52 @@
         </div>
 
         <div class="section" id="stuffControls">
-            <a>
+            <!-- <a>
                 <button>
                     <i class="material-icons right">edit</i>
                     Edit
                 </button>
-            </a>
-            <!-- <a href="/timer/task/ id /delete"> -->
+            </a> -->
+            <a href="/timer/task/<%= id %>/delete">
                 <button>
                     <i class="material-icons right">delete</i>
                     Delete
                 </button>
             </a>
         </div>
+
+        
+        <div class="modal-content">
+            <h2>Edit task:</h2>
+            <form method="post" action="/timer/task/<%= id %>">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input type="text" name="taskName" id="taskInput" class="validate" data-length="32" placeholder="Task Name:" required>
+                    </div>
+                    <div class="input-field col s6">
+                        <input type="number" name="minutes" id="minutesInput" placeholder="Estimated Minutes:" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="text" name="description" id="descriptionInput" data-length="100" placeholder="Task Description/Sub-tasks:">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit">
+                        <i class="material-icons right">send</i>
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+
         <p>Made with <a href="https://github.com/ishaaty/pomodoroByIea" target="_blank" style="color: black"><i class="material-icons" style="font-size: 12px">favorite_border</i></a></p>
 </body>
 </html>

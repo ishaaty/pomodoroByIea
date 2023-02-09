@@ -41,7 +41,7 @@ app.get( "/timer", ( req, res ) => {
 // read item  - works
 const read_task_sql = `
     SELECT 
-        task, estimated_time, description 
+        id, task, estimated_time, description 
     FROM
         tasks
     WHERE
@@ -100,16 +100,27 @@ app.post("/timer", (req, res) =>{
 });
 
 
-// update - does not work
+// update - works T.T
 const update_task_sql = `
-    UPDATE tasks
+    UPDATE 
+        tasks
     SET
-        task = ?
-        estimated_time = ?
+        task = ?,
+        estimated_time = ?,
         description = ?
     WHERE 
-        id = ?;
+        id = ?
 `
+
+app.post("/timer/task/:id", ( req, res ) => {
+    db.execute(update_task_sql, [req.body.taskName, req.body.minutes, req.body.description, req.params.id], (error, results) => {
+        if (error)
+            res.status(500).send(error); //Internal Server Error
+        else {
+            res.redirect(`/timer/task/${req.params.id}`);
+        }
+    });
+})
 
 // app.post("/timer/task/:id")
 

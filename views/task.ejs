@@ -60,15 +60,15 @@
             <form method="post" action="/timer/task/<%= id %>">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input type="text" name="taskName" id="taskInput" class="validate" data-length="32" placeholder="Task Name:" required>
+                        <input type="text" name="taskName" id="taskInput" class="validate" data-length="32" placeholder="Task Name:" value="<%= task %>" required>
                     </div>
                     <div class="input-field col s6">
-                        <input type="number" name="minutes" id="minutesInput" placeholder="Estimated Minutes:" required>
+                        <input type="number" name="minutes" id="minutesInput" placeholder="Estimated Minutes:" value="<%= estimated_time %>" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" name="description" id="descriptionInput" data-length="100" placeholder="Task Description/Sub-tasks:">
+                        <input type="text" name="description" id="descriptionInput" data-length="100" placeholder="Task Description/Sub-tasks:" value="<%= description %>">
                     </div>
                 </div>
                 <div class="modal-footer">

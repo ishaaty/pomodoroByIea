@@ -1,9 +1,10 @@
 //set up the server
 const express = require( "express" );
+const port = process.env.PORT || 8080;
+const helmet = require("helmet");
 const app = express();
-const port = 8080;
 const logger = require("morgan");
-const db = require('./db/db_connection');
+const db = require('./db/db_pool');
 let data;
 
 // Configure Express to use EJS
@@ -14,6 +15,7 @@ app.use(express.urlencoded({encoded: false}));
 // define middleware that logs all incoming requests
 app.use(logger("dev"));
 app.use(express.static(__dirname + '/public'));
+app.use(helmet());
 
 // define a route for the default home page
 app.get( "/", ( req, res ) => {

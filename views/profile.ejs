@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pomodoroByIea</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="/stylesheets/indexStyle.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <link href="/stylesheets/profileStyle.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -21,9 +20,9 @@
                     <li><a href="/timer"><i class="material-icons left">list</i>Timer and Tasks</a></li>
                     <% if (isLoggedIn) { %>
                         <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                        <li><a href="/logout" class = "btn black">Logout</a></li>                        
+                        <li><a href="/logout" class="btn black">Logout</a></li>                        
                     <% } else { %>
-                        <li><a href="/login" class = "btn black">Login</a></li>
+                        <li><a href="/login" class="btn black">Login</a></li>
                     <% } %>
                 </ul>
             </div>
@@ -33,22 +32,24 @@
              <li><a href="/timer"><i class="material-icons left">list</i>Timer and Tasks</a></li>
              <% if (isLoggedIn) { %>
                 <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
-                <li><a href="/logout" class = "btn black">Logout</a></li>                        
+                <li><a href="/logout" class="btn black">Logout</a></li>                        
             <% } else { %>
-                <li><a href="/login" class = "btn black">Login</a></li>
+                <li><a href="/login" class="btn black">Login</a></li>
             <% } %>
         </ul>
     </header>
+    <h1>Profile</h1>
+    <img href="<%= user.picture %>">
+    <p>Given name: <%= user.given_name %></p>
+    <p>Family name: <%= user.family_name %></p>
+    <p>Nickname : <%= user.nickname %></p>
+    <p>Name: <%= user.name %></p>
+    <p>Updated at: <%= user.updated_at %></p>
+    <p>Email: <%= user.email %></p>
+    <p>Locale: <%= user.locale %></p>
+    <p>Email verified: <%= user.email_verified %></p>
+    <p>Sub: <%= user.sub %></p>
+    <p>Sid: <%= user.sid %></p>
 
-    <div>
-        <h1>Welcome!</h1>
-        <h2>Increasing productivity, one task at a time</h2>
-            <a href="/timer">
-                <button>Get started</button>
-            </a>
-    </div>
-    <img src="/images/blackWhiteFlower.jpg">
-    <script src="/scripts/materializeAutoinit.js"></script>
-     
 </body>
 </html>

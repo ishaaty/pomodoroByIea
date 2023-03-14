@@ -15,11 +15,11 @@
         <header>
             <nav>
                 <div class="nav-wrapper">
-                    <a href="/" class="brand-logo">pomodoroByIea</a>
+                    <a href="/" class="brand-logo center">pomodoroByIea</a>
                     <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <ul id="desktop-nav" class="right hide-on-med-and-down">
                         <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-                        <li><a href="/stuff"><i class="material-icons left">list</i>Timer and Tasks</a></li>
+                        <li><a href="/timer"><i class="material-icons left">list</i>Timer and Tasks</a></li>
                         <% if (isLoggedIn) { %>
                             <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
                             <li><a href="/logout" class="btn black">Logout</a></li>                        
@@ -108,9 +108,8 @@
     </div>
     <p style="font-size: 16px; text-align: center">Made with <a href="https://github.com/ishaaty/pomodoroByIea" target="_blank" style="color: black"><i class="material-icons" style="font-size: 12px">favorite_border</i></a></p>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="/scripts/materializeAutoinit.js"></script>
-    <script src="timer.js"></script>
+    <script src="/scripts/timer.js"></script>
 
 </body>
 </html>

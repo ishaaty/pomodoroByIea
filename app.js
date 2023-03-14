@@ -53,13 +53,15 @@ app.get('/authtest', (req, res) => {
 });
 
 app.get('/profile', requiresAuth(), (req, res) => {
-    res.send(JSON.stringify(req.oidc.user));
-  });
+    res.render('profile');
+    // res.render('profile', {profile : req.oidc.user});
+    console.log(JSON.stringify(req.oidc.user));
+});
 
 // define a route for the default home page
 app.get( "/", ( req, res ) => {
     res.render("index");
-} );
+});
 
 // read items - works
 const read_timer_all_sql = `
@@ -174,4 +176,4 @@ app.post("/timer/task/:id", requiresAuth(), ( req, res ) => {
 // start the server
 app.listen( port, () => {
     console.log(`App server listening on ${ port }. (Go to http://localhost:${ port })` );
-});
+})

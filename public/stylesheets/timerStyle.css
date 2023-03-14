@@ -83,5 +83,6 @@ input:active {
 }
 
 nav {
+    text-align: center;
     background-color: black;
 }

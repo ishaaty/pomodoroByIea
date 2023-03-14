@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>task 1</title>
-
+    <title><%= task %></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="/stylesheets/taskStyle.css" rel="stylesheet">
@@ -15,7 +14,7 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo">pomodoroByIea</a>
+                <a href="/" class="brand-logo center">pomodoroByIea</a>
                 <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="desktop-nav" class="right hide-on-med-and-down">
                     <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
@@ -31,7 +30,7 @@
         </nav>
         <ul id="mobile-nav" class="sidenav">
              <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
-             <li><a href="/stuff"><i class="material-icons left">list</i>Timer and Tasks</a></li>
+             <li><a href="/timer"><i class="material-icons left">list</i>Timer and Tasks</a></li>
              <% if (isLoggedIn) { %>
                 <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
                 <li><a href="/logout" class="btn black">Logout</a></li>                        
@@ -110,10 +109,6 @@
 
     </div>
 
-
-
-
-
-        <p>Made with <a href="https://github.com/ishaaty/pomodoroByIea" target="_blank" style="color: black"><i class="material-icons" style="font-size: 12px">favorite_border</i></a></p>
+    <p>Made with <a href="https://github.com/ishaaty/pomodoroByIea" target="_blank" style="color: black"><i class="material-icons" style="font-size: 12px">favorite_border</i></a></p>
 </body>
 </html>

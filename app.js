@@ -1,21 +1,60 @@
-//set up the server
-const express = require( "express" );
 const port = process.env.PORT || 8080;
-const helmet = require("helmet");
-const app = express();
-const logger = require("morgan");
-const db = require('./db/db_pool');
-let data;
 
-// Configure Express to use EJS
+const helmet = require("helmet");
+const express = require( "express" );
+const { auth } = require('express-openid-connect');
+const { requiresAuth } = require('express-openid-connect');
+const logger = require("morgan");
+const dotenv = require('dotenv');
+const db = require('./db/db_pool');
+const app = express();
+
+dotenv.config();
+
 app.set( "views",  __dirname + "/views");
 app.set( "view engine", "ejs" );
 app.use(express.urlencoded({encoded: false}));
-
-// define middleware that logs all incoming requests
 app.use(logger("dev"));
 app.use(express.static(__dirname + '/public'));
-app.use(helmet());
+
+let data;
+
+app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", 'cdnjs.cloudflare.com']
+      }
+    }
+  })); 
+
+  const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: process.env.AUTH0_SECRET,
+    baseURL: process.env.AUTH0_BASE_URL,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
+  };
+  
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.oidc.isAuthenticated();
+    res.locals.user = req.oidc.user;
+    next();
+})
+  
+// req.isAuthenticated is provided from the auth router
+app.get('/authtest', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
+
+app.get('/profile', requiresAuth(), (req, res) => {
+    res.send(JSON.stringify(req.oidc.user));
+  });
 
 // define a route for the default home page
 app.get( "/", ( req, res ) => {
@@ -28,10 +67,12 @@ const read_timer_all_sql = `
         id, task, estimated_time, description
     FROM
         tasks
+    WHERE
+        email = ?
 `
 
-app.get( "/timer", ( req, res ) => {
-    db.execute(read_timer_all_sql, (error, results) => {
+app.get( "/timer", requiresAuth(), ( req, res ) => {
+    db.execute(read_timer_all_sql, [req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); // Internal Server Error
         else
@@ -48,10 +89,12 @@ const read_task_sql = `
         tasks
     WHERE
         id = ?
+    AND
+        email = ?
 `
 
-app.get( "/timer/task/:id", ( req, res, next ) => {
-    db.execute(read_task_sql, [req.params.id], (error, results) => {
+app.get( "/timer/task/:id", requiresAuth(), ( req, res, next ) => {
+    db.execute(read_task_sql, [req.params.id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else if (results.length == 0)
@@ -70,10 +113,12 @@ const delete_task_sql = `
         tasks
     WHERE
         id = ?
+    AND
+        email = ?
 `
 
-app.get("/timer/task/:id/delete", ( req, res ) => {
-    db.execute(delete_task_sql, [req.params.id], (error, results) => {
+app.get("/timer/task/:id/delete", requiresAuth(), ( req, res ) => {
+    db.execute(delete_task_sql, [req.params.id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {
@@ -83,15 +128,15 @@ app.get("/timer/task/:id/delete", ( req, res ) => {
 })
 
 // insert - works
-const insert_task_sql = `
+const create_task_sql = `
     INSERT INTO tasks
-        (task, estimated_time)
+        (task, estimated_time, email)
     VALUES
-        (?, ?)
+        (?, ?, ?)
 `
 
-app.post("/timer", (req, res) =>{
-    db.execute(insert_task_sql, [req.body.taskName, req.body.minutes], (error, results) => {
+app.post("/timer", requiresAuth(), (req, res) =>{
+    db.execute(create_task_sql, [req.body.taskName, req.body.minutes, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {
@@ -112,10 +157,12 @@ const update_task_sql = `
         description = ?
     WHERE 
         id = ?
+    AND 
+        email = ?
 `
 
-app.post("/timer/task/:id", ( req, res ) => {
-    db.execute(update_task_sql, [req.body.taskName, req.body.minutes, req.body.description, req.params.id], (error, results) => {
+app.post("/timer/task/:id", requiresAuth(), ( req, res ) => {
+    db.execute(update_task_sql, [req.body.taskName, req.body.minutes, req.body.description, req.params.id, req.oidc.user.email], (error, results) => {
         if (error)
             res.status(500).send(error); //Internal Server Error
         else {
@@ -123,8 +170,6 @@ app.post("/timer/task/:id", ( req, res ) => {
         }
     });
 })
-
-// app.post("/timer/task/:id")
 
 // start the server
 app.listen( port, () => {

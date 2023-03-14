@@ -16,6 +16,7 @@ const create_tasks_table_sql = `
         task VARCHAR(45) NOT NULL,
         estimated_time INT NOT NULL,
         description VARCHAR(150) NULL,
+        email VARCHAR(50) NULL,
         PRIMARY KEY (id)
     );
 `

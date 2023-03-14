@@ -5,11 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pomodoroByIea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/stylesheets/indexStyle.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="icon" type="image/png" href="/images/favicon.ico">
+
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">pomodoroByIea</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/timer"><i class="material-icons left">list</i>Timer and Tasks</a></li>
+                    <% if (isLoggedIn) { %>
+                        <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
+                        <li><a href="/logout" class = "btn black">Logout</a></li>                        
+                    <% } else { %>
+                        <li><a href="/login" class = "btn black">Login</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+        <ul id="mobile-nav" class="sidenav">
+             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+             <li><a href="/timer"><i class="material-icons left">list</i>Timer and Tasks</a></li>
+             <% if (isLoggedIn) { %>
+                <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
+                <li><a href="/logout" class = "btn black">Logout</a></li>                        
+            <% } else { %>
+                <li><a href="/login" class = "btn black">Login</a></li>
+            <% } %>
+        </ul>
+    </header>
+
     <div>
         <h1>Welcome!</h1>
         <h2>Increasing productivity, one task at a time</h2>
@@ -17,7 +50,9 @@
                 <button>Get started</button>
             </a>
     </div>
-    <img style="margin-top: 30px; margin-bottom: 30px" src="/images/blackWhiteFlower.jpg">
-    <!-- <link rel="shortcut icon" type="image/jpg" href="/images/favicon_io_zip"/> -->
+    <img src="/images/blackWhiteFlower.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/scripts/materializeAutoinit.js"></script>
+     
 </body>
 </html>

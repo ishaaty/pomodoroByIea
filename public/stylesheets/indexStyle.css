@@ -5,6 +5,12 @@ html {
     color: black;
 }
 
+img {
+    margin-top: 30px; 
+    margin-bottom: 30px;
+}
+
+
 h1 {
     font-size: 48px;
 }
@@ -34,4 +40,9 @@ button:hover {
     color: black;
     background-color: white;
     border-color: goldenrod;
+}
+
+nav {
+    text-align: none;
+    background-color: black;
 }

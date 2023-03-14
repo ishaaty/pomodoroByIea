@@ -1,5 +1,6 @@
 html {
     font-family: "Times New Roman";
+    margin-top: 55px;
     color: black;
 }
 
@@ -33,4 +34,8 @@ h1 {
 p {
     font-size: 16px; 
     text-align: center;
+}
+
+nav {
+    background-color: black;
 }
